@@ -1,0 +1,118 @@
+% ---------------------------------
+% -- Assignment 1: Chapter 1, #1 --
+% -- Math 4141 --------------------
+
+% Set document type
+\documentclass[11pt,oneside]{extarticle}
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%\usepackage{thmtools}
+\usepackage{fontspec}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{inputenc}
+%\usepackage{unicode-math}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{garamondx}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{newtxmath}
+\usepackage{solarized-light}
+\usepackage{xcolor}
+%\usepackage{lmodern}
+
+%\usepackage[default]{sourcecodepro}
+\usepackage[T1]{fontenc}
+%\usepackage{inconsolata}
+% Real number symbol
+\newcommand{\Real}{\mathbb{R}}
+%\newcommand{\min}{\mathrm{min}\:}
+
+% Set typewriter font to Source Code Pro
+%\renewcommand{\ttfamily}{\tiny\sourcecodepro}
+
+% Change enumerator to use letters i.e., a, b, c, ...
+\renewcommand{\theenumi}{\alph{enumi}}
+
+\setlength{\belowcaptionskip}{-12pt}
+%\setttfont{
+
+\begin{document}
+\section{Golden Method}
+
+\begin{enumerate}
+    
+    \item Consider the Golden method for $\min g(x)$ in $[a,b]$. Prove that
+        $1/R = (\sqrt{5} - 1) / 2$.
+
+    \item Use the Golden Method to find the minimum point of function
+
+        $$g(x) = 3\sin x\cos x + 2$$
+        in $[a_1,b_1]=[1.5,3.2]$ with $k=4$ (stop at $k=4$).
+
+    \item Explain two advantages of the Golden Method over a search method
+        with $\rho=2/3$.
+
+\end{enumerate}
+
+\section{Fibonacci Method}
+
+\begin{enumerate}
+
+    \item Consider the Fibonacci method for solving $\min g(x)$ in $[a,b]$.
+        Prove that
+
+        $$\frac{I_n}{I_{n-k}}=\frac{1}{F_{k+1}}, k=1,\ldots,n-1$$
+
+        $$\frac{I_k}{I_1}=\frac{F_{n-k+1}}{F_n}, k=2,3,\ldots,n,$$
+
+        where $F_j,j>0$ are the Fibonacci numbers.
+
+    \item Let stop be at $n=9$ in the Fibonacci method. Find $I_2/I_1,I_4/I_1,
+        I_8/I_1$.
+
+\end{enumerate}
+
+\section{Simplex Method}
+
+    \begin{enumerate}
+
+        \item In the Simplex method, give the formulas of locations of
+            $a^\prime, a^\dprime$
+
+    \end{enumerate}
+
+\section{Steepest Descent Method}
+
+\section{Application}
+
+Let
+
+$$g(x,y) = -\left( x^2 + 4xy + 2y^2 \right) e^{ -2x^2 - y^2 }.$$
+
+Use a computer to approximate the local minimization problem of $\min g(x,y)$
+in $\Real^2$ by \emph{one} of the numerical methods: Newton's method, the Steepest
+Descent method, or the simplex method.
+
+\begin{enumerate}
+
+    \item Explain briefly how to solve the problem by the method that you used.
+
+    \item Set up a table of numerical results and iteration numbers by using
+        initial guesses and tolerances. Analyze your results.
+
+    \item What are the advantages and drawbacks of the method based on your
+        analysis?
+
+\end{enumerate}
+
+
+
+
+
+\end{document}
