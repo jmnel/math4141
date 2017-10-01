@@ -51,10 +51,22 @@
     \item Consider the Golden method for $\min g(x)$ in $[a,b]$. Prove that
         $1/R = (\sqrt{5} - 1) / 2$.
 
+        Let $[a_k,b_k] \subset [a,b]$ be the reduced interval at the $k^{th}$ step,
+        then its length is $I_k = b_k - a_k$. The $(k+1)^{th}$ step will see the
+        interval reduced to $[a_{k+1},b_{k+1}]$, with length $I_{k+1}=b_{k+1}-a_{k+1}$.
+
+        Then, the ratio is between consequetive intervals is
+
+        $$
+        \frac{I_k}{I_{k+1}} = R, \forall k \geq 1
+        $$
+
+
     \item Use the Golden Method to find the minimum point of function
 
         $$g(x) = 3\sin x\cos x + 2$$
         in $[a_1,b_1]=[1.5,3.2]$ with $k=4$ (stop at $k=4$).
+
 
     \item Explain two advantages of the Golden Method over a search method
         with $\rho=2/3$.
