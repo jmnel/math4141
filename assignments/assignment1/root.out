@@ -3,3 +3,5 @@
 \BOOKMARK [1][-]{section.3}{Simplex\040Method}{}% 3
 \BOOKMARK [1][-]{section.4}{Steepest\040Descent\040Method}{}% 4
 \BOOKMARK [1][-]{section.5}{Application}{}% 5
+\BOOKMARK [2][-]{subsection.5.1}{Implementation\040of\040the\040simplex\040method}{section.5}% 6
+\BOOKMARK [1][-]{appendix.A}{Nelder-Mead\040function\040declaration\040and\040supporting\040objects}{}% 7

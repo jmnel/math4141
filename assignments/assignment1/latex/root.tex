@@ -23,16 +23,22 @@
 \usepackage{listings}
 \usepackage{newtxmath}
 \usepackage{solarized-light}
-\usepackage{xcolor}
+\usepackage{tikz}
+%%\usepackage{xcolor}
 %\usepackage{lmodern}
 
-%\usepackage[default]{sourcecodepro}
+\usepackage[default]{sourcecodepro}
 \usepackage[T1]{fontenc}
 %\usepackage{inconsolata}
 % Real number symbol
 \newcommand{\Real}{\mathbb{R}}
 \newcommand{\dprime}{{\prime\prime}}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+    \node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
 %\newcommand{\min}{\mathrm{min}\:}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
 
 % Set typewriter font to Source Code Pro
 %\renewcommand{\ttfamily}{\tiny\sourcecodepro}
@@ -55,11 +61,28 @@
         then its length is $I_k = b_k - a_k$. The $(k+1)^{th}$ step will see the
         interval reduced to $[a_{k+1},b_{k+1}]$, with length $I_{k+1}=b_{k+1}-a_{k+1}$.
 
-        Then, the ratio is between consequetive intervals is
+        To determine the ratio $R$ between consequetive intervals $I_k$ and
+        $I_{k+1}$ we require
+
+        $$\circled{1}\quad \frac{I_k}{I_{k+1}} = R,\:\forall k \geq 1, \mathrm{and}$$
+
+        $$\circled{2}\quad I_k = I_{k+1}+I_{k+2},\: \forall k \geq  1.$$
+
+        Plugging \circled{2} into \circled{1} gives
 
         $$
-        \frac{I_k}{I_{k+1}} = R, \forall k \geq 1
+        \frac{I_{k+1}+I_{k+2}}{I_{k+1}} = R
+        \quad\implies\quad
+        1+R=\frac{1}{R}
+        \quad\implies\quad
+        R = \frac{1+\sqrt{5}}{2}
+        \quad\implies\quad
+        \frac{1}{R}=
+        \frac{2}{1+\sqrt{5}}=
+        \frac{\sqrt{5}-1}{2}
         $$
+
+        Note: $R$ is a ratio, so the negative root has no real meaning.
 
 
     \item Use the Golden Method to find the minimum point of function
@@ -91,40 +114,148 @@
 
 \end{enumerate}
 
+\newpage
+
 \section{Simplex Method}
+
+We will limit ourselves to the $2D$ version i.e. $n=2$.
+I will use the following notation instead. Let $\vect{x}_1^{(k)}, 
+\vect{x}_2^{(k)}, \vect{x}_3^{(k)}$ be the \emph{ordered} vertices of the $k^{th}$
+    simplex $\Delta_k$, i.e., s.t.
+
+    $$g( \vect{x}_1^{(k)} ) \leq g( \vect{x}_2^{(k)} ) \leq g( \vect{x}_3^{(k)} ),\:
+    \forall k \geq 1.$$
+
 
     \begin{enumerate}
 
+
         \item In the Simplex method, give the formulas of locations of
             $a^\prime, a^\dprime, a^*, a^{**}, \bar{a},$ and $\bar{b}$.
+   
+            $\alpha > 0$, $\beta > 1$, $0 < \gamma < 1$, and $\sigma$ are 
+            the reflection, expansion, contraction, and shrink parameters 
+            respecitvely.
+
+            Typical values for the parameters are: $\alpha=1,\beta=2,\gamma=1/2$ 
+            and $\sigma=1/2$.
+
+            The centroid (midpoint) $\vect{x}_o^{(k)}$ is given by
+
+            $$\vect{x}_o^{(k)} = 
+            \frac{1}{2}\left( \vect{x}_1^{(k)} + \vect{x}_2^{(k)}\right)
+            $$
+
+            The reflected point is
+            $$\vect{x}_r^{(k)} =
+            \vect{x}_o^{(k)} + \alpha\left(
+            \vect{x}_o^{(k)} - \vect{x}_3^{(k)}\right)
+            $$
+
+            The expansion point is
+            $$
+            \vect{x}_e^{(k)} =
+            \vect{x}_o + \beta\left( \vect{x}_r^{(k)} - \vect{x}_o^{(k)}
+            \right)
+            $$
+
+            The contraction point is
+            $$
+            \vect{x}_c^{(k)} =
+            \vect{x}_o^{(k)} + \gamma\left(
+            ( \vect{x}_3^{(k)} - \vect{x}_o^{(k)}
+            \right)
+            $$
+
+            The shrink vertices are given by
+
+            $$
+            \vect{x}_i^{(k)} = \vect{x}_1^{(k)} + \sigma\left(
+            \vect{x}_i^{(k)} - \vect{x}_1^{(k)}
+            \right),\: \mathrm{for}\: i=2,3
+            $$
 
         \item Consider the minimization function
 
             $$g(x,y) = 2x^2 - x - 2y + y^2 + 4.$$
 
-            Starting from the initial triangle $\Delta a_0b_0c_0$, where
-            $a_0(0.1,0), b_0(0.0,0.1), c_0(0.0,0.0)$, do two steps (i.e. find
-            $\Delta a_2,b_2,c_2$ ) by the simplex method. What is your approximation
+            Starting from the initial triangle $\Delta_0 = \Delta\vect{x}_1\vect{x}_2\vect{x}_3$, 
+            where
+            $$
+            a_0 = \begin{pmatrix}0.1\\ 0\end{pmatrix},
+            b_0 = \begin{pmatrix}0.0\\ 0.1\end{pmatrix},
+                \text{and }
+            c_0 = \begin{pmatrix}0.0\\ 0.0\end{pmatrix}.
+                $$
+                
+                do two steps (i.e. find
+            $\Delta_2$ ) by the simplex method. What is your approximation
             to the minimum point? What are the advantages and drawbacks of the
             simplex method?
+
+            %First, we evaluate $g_i^{(0)} = g(\vect{x}_i^{(0)})$ for $i=1,2,3$.
+
+            %$$g(\vect{a}^{(0)}) = 3.92$$
+
+            \begin{center}
+            \begin{tabular}{c |c|c|c|c|c|c|c||c|c|c}
+                \bf{Operation} & $k$ & x11 & x12 & x21 & x22 & x31 & x32 &
+                g1 & g2 & g3
+                
+                \\
+                \hline
+                \ttfamily{input} & 0 & 
+                0.0 & 0.1 & 
+                0.1 & 0.0 & 
+                0.0 & 0.0 &
+                3.81 & 3.92 & 4.0 \\
+
+                \ttfamily{expand} & 1 &
+                0.15 & 0.15 &
+                0.0 & 0.1 &
+                0.1 & 0.0 &
+                3.62 & 3.81 & 3.92 \\
+
+                \ttfamily{expand} & 2 &
+                0.025 & 0.375 &
+                0.15 & 0.15 &
+                0.0 & 0.1 &
+                3.37 & 3.62 & 3.81 \\
+
+                \ttfamily{expand} & 3 &
+                0.253 & 0.588 &
+                0.025 & 0.375 &
+                0.150 & 0.150 &
+                3.045 & 3.367 & 3.618 \\
+
+            \end{tabular}
+            \end{center}
+
+            Obviously, after only $k=2$ iterations, {\ttfamily minNelderMead}
+            fails to reach any significant tolerance. It gives the following solution
+        $\vect{x}^* \approx \vect{x}^{(2)} = \begin{pmatrix}0.0583\\ 0.2083\end{pmatrix}$.
+            See \emph{(Section 5)} for an example of the implementation of the simplex
+            method.
 
     \end{enumerate}
 
 \section{Steepest Descent Method}
 
 Consider the Steepest Descent method for solving the local minimization of
-$\min g(\vec{x})$ in $\Omega\subset\Real^n$.
+$\min g(\vect{x})$ in $\Omega\subset\Real^n$.
 
     \begin{enumerate}
 
-        \item If the previous approximation is $\vec{x}^{(k-1)}$, what is the
-            $k$'th step search direction $\vec{z}^{(k)}$? Explain briefly why
+        \item If the previous approximation is $\vect{x}^{(k-1)}$, what is the
+            $k$'th step search direction $\vect{z}^{(k)}$? Explain briefly why
             you use this search direction.
 
         \item Write out the Algorithm of the Steepest Descent Method. You need
             to provide the following details:
 
     \end{enumerate}
+
+\newpage
 
 \section{Application}
 
@@ -148,8 +279,75 @@ Descent method, or the simplex method.
 
 \end{enumerate}
 
+\subsection{Implementation of the simplex method}
+
+\par I have created a \emph{C++17} implementation of the simplex method. It is
+primarily implemented in the function {\ttfamily arc::minNelderMead}, declared in
+the {\ttfamily <MinNelderMead.hpp>} header.
 
 
+\par The algorithm's guts can be found the in implementation file
+{\ttfamily <MinNelderMead.cpp>}. No attempt at optimization has been made. The 
+internal state can be stored and read by passing a pointer via the {\ttfamily info} 
+argument. The code is well-commented and should be self explanatory.
 
+\vskip 50pt
+
+\begingroup
+\fontseries{t}\selectfont
+\lstset{language=c++,
+    showstringspaces=false
+    basicstyle=\scriptsize,
+    %keywordstyle=\color{blue}\roboto,
+    %stringstyle=\color{red}\roboto,
+    %commentstyle=\color{green}\roboto
+    %morecomment=[1]\color{magenta}]{\#}
+}
+
+\begin{center}
+    {\bf C++ Listing 5.2:} {\ttfamily arc::minNelderMead} Implementation
+\end{center}
+
+{\scriptsize
+\lstinputlisting[language=c++]
+{../../src/arcmath/MinNelderMead.cpp}
+}
+\endgroup
+
+\newpage
+
+\appendix
+
+\begin{center}
+{\Huge Appendices}
+\end{center}
+
+\section{Nelder-Mead function declaration and supporting objects}
+
+\vskip 20pt
+
+\begingroup
+\fontseries{t}\selectfont
+\lstset{language=c++,
+    showstringspaces=false
+    basicstyle=\scriptsize,
+    %keywordstyle=\color{blue}\roboto,
+    %stringstyle=\color{red}\roboto,
+    %commentstyle=\color{green}\roboto
+    %morecomment=[1]\color{magenta}]{\#}
+}
+
+\begin{center}
+    {\bf C++ Listing 5.1:} Function declaration found in 
+    {\ttfamily MinNelderMead.hpp}.
+\end{center}
+
+{\scriptsize
+\lstinputlisting[language=c++]
+{../../src/arcmath/MinNelderMead.hpp}
+}
+\endgroup
+
+\vskip 40pt
 
 \end{document}

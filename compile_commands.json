@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/home/jacques/repos/math4141/build/simplex",
+  "command": "/usr/bin/ccache  /usr/bin/clang++   -I/home/jacques/repos/math4141/src/arcmath/.  -Wall -Wextra   -Wall -Wextra -O3 -std=gnu++1z -o CMakeFiles/simplex.dir/Main.cpp.o -c /home/jacques/repos/math4141/src/simplex/Main.cpp",
+  "file": "/home/jacques/repos/math4141/src/simplex/Main.cpp"
+},
+{
+  "directory": "/home/jacques/repos/math4141/build/arcmath",
+  "command": "/usr/bin/ccache  /usr/bin/clang++   -I/home/jacques/repos/math4141/src/arcmath/.  -Wall -Wextra   -Wall -Wextra -O3 -std=gnu++1z -o CMakeFiles/arcmath.dir/CoreMath.cpp.o -c /home/jacques/repos/math4141/src/arcmath/CoreMath.cpp",
+  "file": "/home/jacques/repos/math4141/src/arcmath/CoreMath.cpp"
+},
+{
+  "directory": "/home/jacques/repos/math4141/build/arcmath",
+  "command": "/usr/bin/ccache  /usr/bin/clang++   -I/home/jacques/repos/math4141/src/arcmath/.  -Wall -Wextra   -Wall -Wextra -O3 -std=gnu++1z -o CMakeFiles/arcmath.dir/MinNelderMead.cpp.o -c /home/jacques/repos/math4141/src/arcmath/MinNelderMead.cpp",
+  "file": "/home/jacques/repos/math4141/src/arcmath/MinNelderMead.cpp"
+},
+{
+  "directory": "/home/jacques/repos/math4141/build/playground",
+  "command": "/usr/bin/ccache  /usr/bin/clang++   -I/home/jacques/repos/math4141/src/arcmath/.  -Wall -Wextra   -Wall -Wextra -O3 -std=gnu++1z -o CMakeFiles/playground.dir/Main.cpp.o -c /home/jacques/repos/math4141/src/playground/Main.cpp",
+  "file": "/home/jacques/repos/math4141/src/playground/Main.cpp"
+}
+]
